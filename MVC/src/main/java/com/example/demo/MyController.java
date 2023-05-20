@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -181,5 +178,27 @@ public class MyController {
 
         response.setStatus(200);
         response.getWriter().write(allWords);
+    }
+
+    @GetMapping("/users/{username}/products/{productId}")
+    public void getProducts(
+            @PathVariable(value = "username", required = true) String username,
+            @PathVariable("productId") Integer productId,
+            @RequestParam(value = "show_comments", required = false, defaultValue = "true") Boolean showComments,
+            @RequestHeader("API-Token") String apiToken,
+            HttpServletResponse response) throws IOException {
+
+        System.out.println(username);
+        System.out.println(productId);
+        System.out.println(showComments);
+        System.out.println(apiToken);
+
+        if(!apiToken.equals("secret")) {
+            response.setStatus(401);
+            response.getWriter().write("need valid api key");
+        } else {
+            response.setStatus(200);
+            response.getWriter().write("success");
+        }
     }
 }

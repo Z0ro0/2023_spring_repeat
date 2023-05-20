@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
 public class MyController {
     //RequestMapping이 붙어 있으므로 핸들러 메서드로 인식되어 DisparcherSevlet의 요청 처리 위임이 진행됨
     //hello 주소로 요청이 오고 메서드가 GET이라면 반응하도록 설정
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+//    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @GetMapping("/hello")
     //요청 메시지, 응답 메시지 파라미터로 전달받기
     public void hello(HttpServletRequest request, HttpServletResponse response) throws IOException{
         //200 ok 상태 코드 설정(문법적으로 오류가 없고 정상적으로 서버에서 응답을 줌)
